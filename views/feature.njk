@@ -1,0 +1,54 @@
+{% macro template(feature, index) %}
+<div class="usa-grid">
+  {% if index > 1 %}
+    <hr class="hr-light">
+  {% endif %}
+  <div class="info-block">
+    <div class="usa-width-one-half description">
+      <h2 class="heading">{{ feature.heading }}</h2>
+      {% if feature.subheading %}
+        <h4 class="sub-heading">{{ feature.subheading}} </h4>
+      {% endif %}
+      <p class="copy">
+        {{ feature.copy | safe }}
+      </p>
+      <ul class="figure-list">
+        {% if feature.agency %}
+        <li>
+          <h6 class="heading">Agency</h6>
+          <p class="small">
+            {{ feature.agency }}
+          </p>
+        </li>
+        {% endif %}
+        {% if feature.date %}
+        <li>
+          <h6 class="heading">Feature Since</h6>
+          <p class="small">
+            {{ feature.date }}
+          </p>
+        </li>
+        {% endif %}
+        {% if feature.templateUsed %}
+        <li>
+          <h6 class="heading">Built With</h6>
+          <p class="small">
+            <a href="">{{ feature.templateUsed }}</a>
+          </p>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+    <div class="usa-width-one-half info-image">          
+      <img src="{{ feature.image }}"/>
+      {% if feature.caption %}
+      <figcaption class="caption">
+        <p class="small">
+          {{ feature.caption }}
+        </p>
+      </figcaption>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endmacro %}

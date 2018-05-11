@@ -4,6 +4,7 @@ const SiteWideErrorLoader = require('../services/SiteWideErrorLoader');
 const config = require('../../config');
 const { loadAssetManifest, getSiteDisplayEnv, shouldIncludeTracking } = require('../utils');
 const caseStudyData = require('../../public/data/case-studies');
+const featuresData = require('../../public/data/features');
 
 let webpackAssets = loadAssetManifest();
 
@@ -57,6 +58,17 @@ module.exports = {
     const context = Object.assign({}, defaultContext(req), caseStudyData);
 
     return res.render('content/case-studies.njk', context);
+  },
+
+  features(req, res) {
+    // redirect to main app if is authenticated
+    if (req.session.authenticated) {
+      return res.redirect('/sites');
+    }
+
+    const context = Object.assign({}, defaultContext(req), featuresData);
+
+    return res.render('content/features.njk', context);
   },
 
   app(req, res) {
